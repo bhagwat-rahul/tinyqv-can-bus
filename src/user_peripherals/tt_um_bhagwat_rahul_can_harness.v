@@ -7,6 +7,7 @@ module tt_um_bhagwat_rahul_can_harness #(
 ) (
     input        clk,         // Clock normally set to 64MHz.
     input        rst_n,       // Reset_n - low to reset.
+    input        ena,         // This design is active
     input  [7:0] ui_in,       // In PMOD, always available.
     output [7:0] uo_out,      // Out PMOD. Each wire only connected if peripheral selected.
     input  [3:0] address,     // Address within this peripheral's address space
@@ -21,8 +22,8 @@ module tt_um_bhagwat_rahul_can_harness #(
 
   logic baud_tick, tick_16x;
 
-  always @(posedge clk) begin
-    if (rst_n == 0) begin
+  always_ff @(posedge clk) begin
+    if (!rst_n) begin
       // Do reset stuff
     end else begin
 

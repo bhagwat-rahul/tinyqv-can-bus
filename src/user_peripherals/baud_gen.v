@@ -25,8 +25,8 @@ module baud_gen #(
       $fatal(1, "OVS_FACTOR must be power of 2, got %0d", OVS_FACTOR);
   end
 
-  always_ff @(posedge clk or posedge rst_n) begin
-    if (rst_n == 0) begin
+  always_ff @(posedge clk) begin
+    if (!rst_n) begin
       acc <= 49'd0;
       oversample_counter <= {OVSWIDTH{1'b0}};
       baud_tick <= 1'b0;
