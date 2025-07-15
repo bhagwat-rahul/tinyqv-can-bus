@@ -18,7 +18,7 @@ project:
   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
     - "user_peripherals/tt_um_bhagwat_rahul_can_harness.v"
-    - "user_peripherals/baud_gen.v"
+    - "user_peripherals/can_tq_gen.v"
     - "peripheral.v"
     - "tt_wrapper.v"
     - "spi/falling_edge_detector.sv"

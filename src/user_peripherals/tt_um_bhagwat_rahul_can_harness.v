@@ -1,9 +1,7 @@
 `default_nettype none
 
 module tt_um_bhagwat_rahul_can_harness #(
-    parameter int unsigned BAUD_RATE = 500000,
-    parameter int unsigned CLK_FREQ = 64000000,  // 64 MHz
-    parameter logic [4:0] OVS_FACTOR = 16  // Oversampling Factor
+    parameter int unsigned CLK_FREQ = 64000000  // 64 MHz
 ) (
     input  logic       clk,      // Clock normally set to 64MHz
     input  logic       rst_n,    // Reset_n - low to reset
@@ -18,25 +16,14 @@ module tt_um_bhagwat_rahul_can_harness #(
     // ins are sync'd to clock, will introduce 2 cycle delay on ins.
 );
 
-  logic baud_tick, tick_16x;
-
   always_ff @(posedge clk) begin
     if (!rst_n) begin
-      // Do reset stuff
+      uo_out[7:1]  <= 7'd0;
+      uio_out[7:0] <= 8'd0;
+      uio_oe[7:0]  <= 8'd0;
     end else begin
 
     end
   end
-
-  baud_gen #(
-      .BAUD_RATE (BAUD_RATE),
-      .CLK_FREQ  (CLK_FREQ),
-      .OVS_FACTOR(OVS_FACTOR)
-  ) baud_gen_a (
-      .clk(clk),
-      .rst_n(rst_n),
-      .baud_tick(baud_tick),
-      .tick_16x(tick_16x)
-  );
 
 endmodule
