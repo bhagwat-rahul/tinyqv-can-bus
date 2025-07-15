@@ -5,15 +5,15 @@ module tt_um_bhagwat_rahul_can_harness #(
     parameter int unsigned CLK_FREQ = 64000000,  // 64 MHz
     parameter logic [4:0] OVS_FACTOR = 16  // Oversampling Factor
 ) (
-    input        clk,         // Clock normally set to 64MHz.
-    input        rst_n,       // Reset_n - low to reset.
-    input        ena,         // This design is active
-    input  [7:0] ui_in,       // In PMOD, always available.
-    output [7:0] uo_out,      // Out PMOD. Each wire only connected if peripheral selected.
-    input  [3:0] address,     // Address within this peripheral's address space
-    input        data_write,  // Data write request from the TinyQV core.
-    input  [7:0] data_in,     // Data in, valid when data_write is high.
-    output [7:0] data_out     // Data out, set in accordance w supplied address
+    input  logic       clk,         // Clock normally set to 64MHz
+    input  logic       rst_n,       // Reset_n - low to reset
+    input  logic       ena,         // design active, always 1 ignore
+    input  logic [7:0] ui_in,       // In PMOD, always available.
+    output logic [7:0] uo_out,      // Out PMOD. Each wire only conn'd if periph selected
+    input  logic [3:0] address,     // Address within this peripheral's address space
+    input  logic       data_write,  // Data write request from the TinyQV core
+    input  logic [7:0] data_in,     // Data in, valid when data_write is high
+    output logic [7:0] data_out     // Data out, set in accordance w supplied address
 
     // Note that uo_out[0] is normally used for UART TX.
     // Note that ui_in[7] is normally used for UART RX.
