@@ -19,6 +19,8 @@ project:
   source_files:
     - "user_peripherals/tt_um_bhagwat_rahul_can_harness.v"
     - "user_peripherals/can_tq_gen.v"
+    - "user_peripherals/can_rx_path.v"
+    - "user_peripherals/can_tx_path.v"
     - "peripheral.v"
     - "tt_wrapper.v"
     - "spi/falling_edge_detector.sv"
