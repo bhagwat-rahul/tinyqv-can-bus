@@ -35,19 +35,19 @@ module can_tq_gen #(
     end
   end
 
-    // Time Quanta Gen
-    logic [5:0] brp_cnt;
-    always_ff @(posedge clk) begin
-        if (!rst_n) begin
-          brp_cnt <= 0;
-          tq_tick <= 0;
-        end else if (brp_cnt == brp ) begin
-          brp_cnt <= 0;
-          tq_tick <= 1;
-        end else begin
-          brp_cnt <= brp_cnt + 1;
-          tq_tick <= 0;
-        end
-      end
+  // Time Quanta Gen
+  logic [5:0] brp_cnt;
+  always_ff @(posedge clk) begin
+    if (!rst_n) begin
+      brp_cnt <= 0;
+      tq_tick <= 0;
+    end else if (brp_cnt == brp) begin
+      brp_cnt <= 0;
+      tq_tick <= 1;
+    end else begin
+      brp_cnt <= brp_cnt + 1;
+      tq_tick <= 0;
+    end
+  end
 
 endmodule
