@@ -20,7 +20,7 @@ module can_tq_gen #(
 );
 
   logic [5:0] brp_cnt;
-  logic [4:0] tq_cnt;
+  logic [4:0] total_tqs_per_bit;
 
   typedef enum {
     SYNC,
@@ -39,13 +39,19 @@ module can_tq_gen #(
       prop_seg              <= 1'b0;
       phase_seg1            <= 1'b0;
       phase_seg2            <= 1'b0;
-      brp_cnt               <= 1'b0;
+      brp_cnt               <= 6'b0;
       tq_position           <= 5'd1;
       segment_position      <= SYNC;
       next_segment_position <= SYNC;
     end else if (brp_cnt == brp) begin
-      brp_cnt <= 0;
-      tq_tick <= 1;
+      brp_cnt          <= 0;
+      tq_tick          <= 1;
+      segment_position <= next_segment_position;
+      if (tq_position == total_tqs_per_bit) begin
+        tq_position <= 5'd1;  // Reset to 1 at start of new bit
+      end else begin
+        tq_position <= tq_position + 1;  // Increment within bit
+      end
     end else begin
       brp_cnt <= brp_cnt + 1;
       tq_tick <= 0;
@@ -64,5 +70,7 @@ module can_tq_gen #(
       endcase
     end
   end
+
+  assign total_tqs_per_bit = 5'd1 + {1'b0, tseg1} + {2'b0, tseg2};
 
 endmodule
