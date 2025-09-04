@@ -21,6 +21,7 @@ module can_tq_gen #(
 
   logic [5:0] brp_cnt;
   logic [4:0] total_tqs_per_bit;
+  logic [4:0] tq_position_reg;
 
   typedef enum {
     SYNC,
@@ -60,7 +61,6 @@ module can_tq_gen #(
 
   // Segment Counter
   always_comb begin
-    next_segment_position = segment_position;  // continue with current as default
     if (tq_tick) begin
       unique case (segment_position)
         SYNC:   ;
@@ -72,5 +72,10 @@ module can_tq_gen #(
   end
 
   assign total_tqs_per_bit = 5'd1 + {1'b0, tseg1} + {2'b0, tseg2};
+  assign tq_position       = tq_position_reg;
+  assign sync_seg          = (segment_position == SYNC);
+  assign prop_seg          = (segment_position == PROP);
+  assign phase_seg1        = (segment_position == PHASE1);
+  assign phase_seg2        = (segment_position == PHASE2);
 
 endmodule
