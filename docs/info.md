@@ -9,7 +9,7 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## What it does
 
-Explain what your peripheral does and how it works
+This is a can bus that connects to a microcontroller to interface with car/robotics hw.
 
 ## Register map
 
@@ -21,7 +21,7 @@ Document the registers that are used to interact with your peripheral
 
 ## How to test
 
-Explain how to use your project
+TODO: Adding a dummy line here for tests to pass will fix this once implemented
 
 ## External hardware
 
